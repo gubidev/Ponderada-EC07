@@ -1,0 +1,132 @@
+{
+  "versao_modelo": "1.0.0",
+  "treinado_em": "2026-10-05T17:41:58+00:00",
+  "algoritmo": "StandardScaler + Ridge(alpha=1.0)",
+  "alvo": "log(close[t+1] / close[t])",
+  "par": "BTCUSDT",
+  "intervalo": "1d",
+  "fonte_dados": "klines diarios da API publica da Binance, CSV em data/btcusdt_1d.csv",
+  "janelas": {
+    "treino": {
+      "inicio": "2024-01-30",
+      "fim": "2025-12-07",
+      "dias": 678
+    },
+    "validacao": {
+      "inicio": "2025-12-08",
+      "fim": "2026-05-06",
+      "dias": 150
+    },
+    "teste": {
+      "inicio": "2026-05-07",
+      "fim": "2026-10-03",
+      "dias": 150
+    }
+  },
+  "treino_final": {
+    "inicio": "2024-01-30",
+    "fim": "2026-05-06",
+    "dias": 828
+  },
+  "features": [
+    "ret_lag_1",
+    "ret_lag_2",
+    "ret_lag_3",
+    "ret_lag_5",
+    "ret_lag_10",
+    "desvio_sma_7",
+    "desvio_sma_21",
+    "volatilidade_7",
+    "desvio_volume_7",
+    "amplitude_relativa"
+  ],
+  "coeficientes": {
+    "ret_lag_1": -0.0016855799617460593,
+    "ret_lag_2": 0.002750769827196808,
+    "ret_lag_3": -0.001037454293599657,
+    "ret_lag_5": 0.0028809587052109702,
+    "ret_lag_10": -0.0025153074030093772,
+    "desvio_sma_7": -0.005131222641654687,
+    "desvio_sma_21": 0.003901848976648143,
+    "volatilidade_7": 0.00017413119159185434,
+    "desvio_volume_7": 0.00045827121442301857,
+    "amplitude_relativa": 0.00012822676586665363
+  },
+  "busca_alpha_validacao": [
+    {
+      "alpha": 0.1,
+      "mae_usd": 1330.4426985700359,
+      "rmse_usd": 1915.967417857644,
+      "mape_pct": 1.7639690500376441,
+      "acerto_direcao_pct": 54.0
+    },
+    {
+      "alpha": 1.0,
+      "mae_usd": 1330.391818777779,
+      "rmse_usd": 1915.898657109731,
+      "mape_pct": 1.763875997126852,
+      "acerto_direcao_pct": 54.0
+    },
+    {
+      "alpha": 10.0,
+      "mae_usd": 1330.5755096815894,
+      "rmse_usd": 1916.4321092496825,
+      "mape_pct": 1.764131034630238,
+      "acerto_direcao_pct": 55.333333333333336
+    },
+    {
+      "alpha": 50.0,
+      "mae_usd": 1332.5596012032158,
+      "rmse_usd": 1919.4023054428553,
+      "mape_pct": 1.7672031774962844,
+      "acerto_direcao_pct": 54.0
+    },
+    {
+      "alpha": 100.0,
+      "mae_usd": 1333.7486664961798,
+      "rmse_usd": 1921.4605481369747,
+      "mape_pct": 1.76914362668837,
+      "acerto_direcao_pct": 50.66666666666667
+    },
+    {
+      "alpha": 300.0,
+      "mae_usd": 1335.372561497365,
+      "rmse_usd": 1924.8483091051467,
+      "mape_pct": 1.7719214416110998,
+      "acerto_direcao_pct": 53.333333333333336
+    },
+    {
+      "alpha": 1000.0,
+      "mae_usd": 1336.42215355142,
+      "rmse_usd": 1927.946744678548,
+      "mape_pct": 1.773831913857706,
+      "acerto_direcao_pct": 50.0
+    },
+    {
+      "alpha": 3000.0,
+      "mae_usd": 1336.7499694237995,
+      "rmse_usd": 1929.9398901272202,
+      "mape_pct": 1.7744758764604376,
+      "acerto_direcao_pct": 49.333333333333336
+    }
+  ],
+  "metricas_teste": {
+    "mae_usd": 1002.918969510674,
+    "rmse_usd": 1454.7912780950548,
+    "mape_pct": 1.4166114909402208,
+    "acerto_direcao_pct": 48.66666666666667
+  },
+  "metricas_baseline_ultimo_preco": {
+    "mae_usd": 981.8414666666669,
+    "rmse_usd": 1429.294043373861,
+    "mape_pct": 1.3851987294008439,
+    "acerto_direcao_pct": null
+  },
+  "ganho_mae_sobre_baseline_pct": -2.15,
+  "versoes": {
+    "python": "3.12.14",
+    "scikit_learn": "1.5.2",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3"
+  }
+}

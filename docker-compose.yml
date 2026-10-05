@@ -1,0 +1,35 @@
+services:
+
+  treino:
+    build:
+      context: .
+      dockerfile: training/Dockerfile
+    image: ponderada-ec07-treino
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./data:/data:ro
+      - ./model:/model
+    command: >
+      python training/train.py
+      --csv /data/btcusdt_1d.csv
+      --saida /model
+      --dias-teste 150
+
+  
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    image: ponderada-ec07-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./model:/model:ro
+      - ./data:/data:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
